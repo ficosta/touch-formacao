@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="theme-color" content="#0f3a2e" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="./icon-192.png" />
+    <title>Aufstellung — Touch Formação</title>
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <main id="app" aria-label="Touch Formação">
+      <section class="left-panel" aria-label="Controles">
+        <header class="brand">
+          <div class="brand-mark">BILD</div>
+          <h1>AUFSTELLUNG<br /><span>DEUTSCHLAND</span></h1>
+        </header>
+        <div class="trash" id="trash" aria-label="Remover jogador">🗑</div>
+        <div class="slots" id="slots" aria-label="Slots de salvamento"></div>
+      </section>
+      <section class="field-panel" aria-label="Campo">
+        <div class="field" id="field">
+          <img src="./field.png" alt="" class="field-img" draggable="false" />
+          <div class="placed-layer" id="placed-layer"></div>
+        </div>
+      </section>
+      <aside class="sidebar" id="sidebar" aria-label="Elenco"></aside>
+    </main>
+    <div id="drag-ghost" class="drag-ghost" hidden></div>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>

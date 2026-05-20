@@ -1,0 +1,26 @@
+[
+  { "id": "gk1", "name": "Manuel Neuer", "position": "GK", "photo": "./photos/gk1.jpg" },
+  { "id": "gk2", "name": "Marc-André ter Stegen", "position": "GK", "photo": "./photos/gk2.jpg" },
+  { "id": "gk3", "name": "Oliver Baumann", "position": "GK", "photo": "./photos/gk3.jpg" },
+
+  { "id": "df1", "name": "Antonio Rüdiger", "position": "DEF", "photo": "./photos/df1.jpg" },
+  { "id": "df2", "name": "Jonathan Tah", "position": "DEF", "photo": "./photos/df2.jpg" },
+  { "id": "df3", "name": "Joshua Kimmich", "position": "DEF", "photo": "./photos/df3.jpg" },
+  { "id": "df4", "name": "David Raum", "position": "DEF", "photo": "./photos/df4.jpg" },
+  { "id": "df5", "name": "Nico Schlotterbeck", "position": "DEF", "photo": "./photos/df5.jpg" },
+  { "id": "df6", "name": "Benjamin Henrichs", "position": "DEF", "photo": "./photos/df6.jpg" },
+  { "id": "df7", "name": "Maximilian Mittelstädt", "position": "DEF", "photo": "./photos/df7.jpg" },
+
+  { "id": "mf1", "name": "Toni Kroos", "position": "MID", "photo": "./photos/mf1.jpg" },
+  { "id": "mf2", "name": "İlkay Gündoğan", "position": "MID", "photo": "./photos/mf2.jpg" },
+  { "id": "mf3", "name": "Robert Andrich", "position": "MID", "photo": "./photos/mf3.jpg" },
+  { "id": "mf4", "name": "Pascal Groß", "position": "MID", "photo": "./photos/mf4.jpg" },
+  { "id": "mf5", "name": "Jamal Musiala", "position": "MID", "photo": "./photos/mf5.jpg" },
+  { "id": "mf6", "name": "Florian Wirtz", "position": "MID", "photo": "./photos/mf6.jpg" },
+  { "id": "mf7", "name": "Leroy Sané", "position": "MID", "photo": "./photos/mf7.jpg" },
+
+  { "id": "st1", "name": "Kai Havertz", "position": "STR", "photo": "./photos/st1.jpg" },
+  { "id": "st2", "name": "Niclas Füllkrug", "position": "STR", "photo": "./photos/st2.jpg" },
+  { "id": "st3", "name": "Thomas Müller", "position": "STR", "photo": "./photos/st3.jpg" },
+  { "id": "st4", "name": "Deniz Undav", "position": "STR", "photo": "./photos/st4.jpg" }
+]

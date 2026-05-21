@@ -73,6 +73,12 @@ export function initDragDrop(opts: DragDropOptions): void {
     const offsetX = e.clientX - rect.left;
     const offsetY = e.clientY - rect.top;
 
+    // Capture pointer FIRST, before any DOM mutation, so iOS keeps routing events to root
+    // even if the source element becomes hidden or is removed from layout.
+    if (typeof root.setPointerCapture === 'function') {
+      try { root.setPointerCapture(e.pointerId); } catch { /* el not in tree */ }
+    }
+
     startGhost(hit.el, rect);
     placeGhost(e.clientX - offsetX, e.clientY - offsetY);
     hit.el.classList.add('is-dragging-source');
@@ -85,7 +91,6 @@ export function initDragDrop(opts: DragDropOptions): void {
       offsetX,
       offsetY
     };
-    if (typeof root.setPointerCapture === 'function') root.setPointerCapture(e.pointerId);
   }
 
   function onPointerMove(e: PointerEvent): void {

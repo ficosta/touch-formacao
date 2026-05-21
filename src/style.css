@@ -200,6 +200,15 @@ html, body {
   pointer-events: auto;
   width: max-content;
   min-width: 150px;
+  touch-action: none;
+  -webkit-user-drag: none;
+}
+
+.field-card img,
+.drag-ghost img {
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
 }
 
 .field-card:active { cursor: grabbing; }
@@ -264,6 +273,7 @@ html, body {
   overflow-y: auto;
   padding-right: 4px;
   -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
 }
 
 .sidebar__group { display: flex; flex-direction: column; gap: 4px; }
@@ -322,6 +332,8 @@ html, body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  touch-action: none;
+  -webkit-user-drag: none;
 }
 
 .sidebar__row:active { cursor: grabbing; }
@@ -340,7 +352,7 @@ html, body {
   will-change: transform;
 }
 
-.is-dragging-source { opacity: 0; visibility: hidden; }
+.is-dragging-source { opacity: 0; pointer-events: none; }
 
 /* ============================================================
    MISC

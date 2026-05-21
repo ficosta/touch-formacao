@@ -39,7 +39,20 @@ async function bootstrap(): Promise<void> {
   });
 
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js').catch(() => {});
+    const hadController = !!navigator.serviceWorker.controller;
+    let reloaded = false;
+    navigator.serviceWorker.register('./sw.js').then(reg => {
+      reg.addEventListener('updatefound', () => {
+        const next = reg.installing;
+        if (!next) return;
+        next.addEventListener('statechange', () => {
+          if (next.state === 'activated' && hadController && !reloaded) {
+            reloaded = true;
+            window.location.reload();
+          }
+        });
+      });
+    }).catch(() => {});
   }
 }
 

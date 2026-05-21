@@ -52,4 +52,35 @@ describe('createFieldView', () => {
     });
     expect(container.querySelectorAll('.field-card')).toHaveLength(0);
   });
+
+  it('reuses card DOM node across moves (no flicker)', () => {
+    const view = createFieldView(container, players);
+    view.render({
+      current: { placed: [{ playerId: 'p1', x: 10, y: 20 }] },
+      slots: [null, null, null]
+    });
+    const cardBefore = container.querySelector('.field-card')!;
+    view.render({
+      current: { placed: [{ playerId: 'p1', x: 80, y: 70 }] },
+      slots: [null, null, null]
+    });
+    const cardAfter = container.querySelector('.field-card')!;
+    expect(cardAfter).toBe(cardBefore); // same node instance
+    expect((cardAfter as HTMLElement).style.left).toBe('80%');
+  });
+
+  it('removes only cards no longer placed', () => {
+    const view = createFieldView(container, players);
+    view.render({
+      current: { placed: [{ playerId: 'p1', x: 10, y: 20 }, { playerId: 'p2', x: 30, y: 40 }] },
+      slots: [null, null, null]
+    });
+    expect(container.querySelectorAll('.field-card')).toHaveLength(2);
+    view.render({
+      current: { placed: [{ playerId: 'p2', x: 30, y: 40 }] },
+      slots: [null, null, null]
+    });
+    expect(container.querySelectorAll('.field-card')).toHaveLength(1);
+    expect(container.querySelector<HTMLElement>('.field-card')!.dataset.playerId).toBe('p2');
+  });
 });

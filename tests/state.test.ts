@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { Store, reduce, isValidState, loadFromStorage, saveToStorage } from '../src/state';
-import { EMPTY_STATE, AppState } from '../src/types';
+import { EMPTY_STATE } from '../src/constants';
+import { AppState } from '../src/types';
 
 function makeStorage(): Storage {
   const map = new Map<string, string>();
@@ -60,10 +61,12 @@ describe('reduce', () => {
     expect(s).toBe(EMPTY_STATE);
   });
 
-  it('reset returns empty state', () => {
+  it('clear-current empties placed but preserves slots', () => {
     let s = reduce(EMPTY_STATE, { type: 'add', playerId: 'p1', x: 10, y: 10 });
-    s = reduce(s, { type: 'reset' });
-    expect(s).toEqual(EMPTY_STATE);
+    s = reduce(s, { type: 'save-slot', slot: 1 });
+    s = reduce(s, { type: 'clear-current' });
+    expect(s.current.placed).toEqual([]);
+    expect(s.slots[1]?.placed).toHaveLength(1);
   });
 
   it('is immutable (does not mutate input)', () => {
@@ -114,12 +117,13 @@ describe('storage round-trip', () => {
 });
 
 describe('Store', () => {
-  it('notifies subscribers on dispatch', () => {
+  it('notifies subscribers with state and action', () => {
     const store = new Store(EMPTY_STATE, null);
-    let calls = 0;
-    store.subscribe(() => calls++);
+    const seen: string[] = [];
+    store.subscribe((_s, a) => seen.push(a.type));
     store.dispatch({ type: 'add', playerId: 'p1', x: 1, y: 1 });
-    expect(calls).toBe(1);
+    store.dispatch({ type: 'move', playerId: 'p1', x: 5, y: 5 });
+    expect(seen).toEqual(['add', 'move']);
   });
 
   it('skips notification when reduce returns same state', () => {

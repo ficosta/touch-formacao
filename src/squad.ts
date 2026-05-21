@@ -1,4 +1,5 @@
-import { Player, Position, POSITION_ORDER } from './types';
+import { Player, Position } from './types';
+import { POSITION_ORDER } from './constants';
 
 function isPosition(v: unknown): v is Position {
   return typeof v === 'string' && (POSITION_ORDER as readonly string[]).includes(v);
@@ -24,11 +25,4 @@ export async function loadSquad(url = './squad.json'): Promise<Player[]> {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Failed to load squad (${res.status})`);
   return parseSquad(await res.json());
-}
-
-export function groupByPosition(players: readonly Player[]): Record<Position, Player[]> {
-  const out: Record<Position, Player[]> = { GK: [], DEF: [], MID: [], STR: [] };
-  for (const p of players) out[p.position].push(p);
-  for (const k of POSITION_ORDER) out[k].sort((a, b) => a.name.localeCompare(b.name));
-  return out;
 }

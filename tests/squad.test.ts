@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { parseSquad, groupByPosition } from '../src/squad';
+import { parseSquad } from '../src/squad';
 
 describe('parseSquad', () => {
   it('parses valid squad', () => {
@@ -28,19 +28,5 @@ describe('parseSquad', () => {
 
   it('rejects missing name', () => {
     expect(() => parseSquad([{ id: 'a', position: 'GK' }])).toThrow(/name/);
-  });
-});
-
-describe('groupByPosition', () => {
-  it('groups and sorts by name', () => {
-    const out = groupByPosition([
-      { id: 'b', name: 'Bob', position: 'DEF', photo: '' },
-      { id: 'a', name: 'Alice', position: 'DEF', photo: '' },
-      { id: 'c', name: 'Carol', position: 'STR', photo: '' }
-    ]);
-    expect(out.DEF.map(p => p.name)).toEqual(['Alice', 'Bob']);
-    expect(out.STR.map(p => p.name)).toEqual(['Carol']);
-    expect(out.GK).toEqual([]);
-    expect(out.MID).toEqual([]);
   });
 });

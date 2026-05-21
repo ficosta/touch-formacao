@@ -1,15 +1,7 @@
-import {
-  AppState,
-  EMPTY_STATE,
-  Lineup,
-  Placed,
-  SlotIndex
-} from './types';
+import { AppState, Lineup, Placed, SlotIndex } from './types';
+import { EMPTY_STATE, STORAGE_KEY } from './constants';
 
-const STORAGE_KEY = 'touch-formacao:state';
 const DEBOUNCE_MS = 200;
-
-type Listener = (state: AppState) => void;
 
 export type Action =
   | { type: 'add'; playerId: string; x: number; y: number }
@@ -17,7 +9,11 @@ export type Action =
   | { type: 'remove'; playerId: string }
   | { type: 'save-slot'; slot: SlotIndex }
   | { type: 'load-slot'; slot: SlotIndex }
-  | { type: 'reset' };
+  | { type: 'clear-current' };
+
+export type ActionType = Action['type'];
+
+export type Listener = (state: AppState, action: Action) => void;
 
 export function reduce(state: AppState, action: Action): AppState {
   switch (action.type) {
@@ -46,8 +42,8 @@ export function reduce(state: AppState, action: Action): AppState {
       if (!slot) return state;
       return { ...state, current: { placed: [...slot.placed] } };
     }
-    case 'reset':
-      return EMPTY_STATE;
+    case 'clear-current':
+      return { ...state, current: { placed: [] } };
   }
 }
 
@@ -87,11 +83,14 @@ export function saveToStorage(state: AppState, storage: Storage = localStorage):
 
 export class Store {
   private state: AppState;
-  private listeners = new Set<Listener>();
+  private readonly listeners = new Set<Listener>();
   private saveTimer: ReturnType<typeof setTimeout> | null = null;
   private readonly storage: Storage | null;
 
-  constructor(initial: AppState, storage: Storage | null = typeof localStorage !== 'undefined' ? localStorage : null) {
+  constructor(
+    initial: AppState,
+    storage: Storage | null = typeof localStorage !== 'undefined' ? localStorage : null
+  ) {
     this.state = initial;
     this.storage = storage;
   }
@@ -104,13 +103,21 @@ export class Store {
     const next = reduce(this.state, action);
     if (next === this.state) return;
     this.state = next;
-    this.listeners.forEach(l => l(next));
+    this.listeners.forEach(l => l(next, action));
     this.scheduleSave();
   }
 
   subscribe(listener: Listener): () => void {
     this.listeners.add(listener);
     return () => this.listeners.delete(listener);
+  }
+
+  flush(): void {
+    if (this.saveTimer !== null) {
+      clearTimeout(this.saveTimer);
+      this.saveTimer = null;
+    }
+    if (this.storage) saveToStorage(this.state, this.storage);
   }
 
   private scheduleSave(): void {
@@ -121,13 +128,5 @@ export class Store {
       saveToStorage(this.state, storage);
       this.saveTimer = null;
     }, DEBOUNCE_MS);
-  }
-
-  flush(): void {
-    if (this.saveTimer !== null) {
-      clearTimeout(this.saveTimer);
-      this.saveTimer = null;
-    }
-    if (this.storage) saveToStorage(this.state, this.storage);
   }
 }

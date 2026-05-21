@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { Store } from '../src/state';
-import { EMPTY_STATE } from '../src/types';
-import { initSlots, HOLD_MS } from '../src/slots';
+import { EMPTY_STATE } from '../src/constants';
+import { initSlots, HOLD_MS } from '../src/interactions/slots';
 
 function makeSlots(container: HTMLElement): void {
   for (let i = 0; i < 3; i++) {

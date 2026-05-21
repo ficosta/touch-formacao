@@ -1,18 +1,25 @@
-import { Store } from './state';
-import { SlotIndex } from './types';
+import { Store } from '../state';
+import { SlotIndex } from '../types';
 
 export const HOLD_MS = 600;
 
-export function initSlots(opts: {
+export type SlotsOptions = {
   container: HTMLElement;
   store: Store;
-  now?: () => number;
   confirmLoad?: (slot: SlotIndex) => boolean;
-}): void {
-  const { container, store } = opts;
-  const confirmLoad = opts.confirmLoad ?? ((_s: SlotIndex) => true);
+};
 
-  type Active = { slot: SlotIndex; pointerId: number; el: HTMLElement; timer: ReturnType<typeof setTimeout>; saved: boolean };
+export function initSlots(opts: SlotsOptions): void {
+  const { container, store } = opts;
+  const confirmLoad = opts.confirmLoad ?? (() => true);
+
+  type Active = {
+    slot: SlotIndex;
+    pointerId: number;
+    el: HTMLElement;
+    timer: ReturnType<typeof setTimeout>;
+    saved: boolean;
+  };
   let active: Active | null = null;
 
   function getSlotEl(target: EventTarget | null): HTMLElement | null {
@@ -20,13 +27,18 @@ export function initSlots(opts: {
     return target.closest<HTMLElement>('.slot');
   }
 
+  function parseSlot(el: HTMLElement): SlotIndex | null {
+    const raw = el.dataset.slot;
+    if (raw === undefined) return null;
+    const n = Number(raw);
+    return n === 0 || n === 1 || n === 2 ? n : null;
+  }
+
   function onDown(e: PointerEvent): void {
     const el = getSlotEl(e.target);
     if (!el) return;
-    const slotAttr = el.dataset.slot;
-    if (slotAttr === undefined) return;
-    const slot = Number(slotAttr) as SlotIndex;
-    if (slot !== 0 && slot !== 1 && slot !== 2) return;
+    const slot = parseSlot(el);
+    if (slot === null) return;
     e.preventDefault();
     el.classList.add('slot--holding');
     const timer = setTimeout(() => {

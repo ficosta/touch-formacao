@@ -2,7 +2,7 @@
   { "id": "baumann",       "name": "Oliver Baumann",         "position": "GK",  "photo": "./photos/baumann.png" },
   { "id": "neuer",         "name": "Manuel Neuer",           "position": "GK",  "photo": "./photos/neuer.png" },
   { "id": "nubel",         "name": "Alexander Nübel",        "position": "GK",  "photo": "./photos/nubel.png" },
-  { "id": "urbig",         "name": "Jonas Urbig",            "position": "GK",  "photo": "" },
+  { "id": "urbig",         "name": "Jonas Urbig",            "position": "GK",  "photo": "./photos/urbig.png" },
 
   { "id": "anton",         "name": "Waldemar Anton",         "position": "DEF", "photo": "./photos/anton.png" },
   { "id": "brown",         "name": "Nathaniel Brown",        "position": "DEF", "photo": "./photos/brown.png" },

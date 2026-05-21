@@ -39,7 +39,7 @@ describe('createSidebarView', () => {
   it('renders 4 groups in fixed order', () => {
     createSidebarView(container, players, null).render(EMPTY_STATE);
     const labels = Array.from(container.querySelectorAll('.sidebar__head-label')).map(e => e.textContent);
-    expect(labels).toEqual(['TORHÜTER', 'VERTEIDIGER', 'MITTELFELD', 'ANGRIFF']);
+    expect(labels).toEqual(['TORHÜTER', 'ABWEHR', 'MITTELFELD', 'ANGRIFF']);
   });
 
   it('omits players already placed on the field', () => {
@@ -71,11 +71,11 @@ describe('createSidebarView', () => {
     }
 
     const defHead = Array.from(container.querySelectorAll<HTMLElement>('.sidebar__head'))
-      .find(h => h.querySelector('.sidebar__head-label')?.textContent === 'VERTEIDIGER')!;
+      .find(h => h.querySelector('.sidebar__head-label')?.textContent === 'ABWEHR')!;
     expect(defHead.classList.contains('sidebar__head--collapsed')).toBe(false);
     tap(defHead);
     const collapsedHead = Array.from(container.querySelectorAll<HTMLElement>('.sidebar__head'))
-      .find(h => h.querySelector('.sidebar__head-label')?.textContent === 'VERTEIDIGER')!;
+      .find(h => h.querySelector('.sidebar__head-label')?.textContent === 'ABWEHR')!;
     expect(collapsedHead.classList.contains('sidebar__head--collapsed')).toBe(true);
     const defGroup = collapsedHead.parentElement!;
     expect(defGroup.querySelector<HTMLElement>('.sidebar__list')!.hidden).toBe(true);

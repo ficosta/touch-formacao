@@ -4,7 +4,7 @@ export const POSITION_ORDER: readonly Position[] = ['GK', 'DEF', 'MID', 'STR'];
 
 export const POSITION_LABEL: Record<Position, string> = {
   GK: 'TORHÜTER',
-  DEF: 'VERTEIDIGER',
+  DEF: 'ABWEHR',
   MID: 'MITTELFELD',
   STR: 'ANGRIFF'
 };

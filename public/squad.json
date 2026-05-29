@@ -15,9 +15,9 @@
 
   { "id": "gross",         "name": "Pascal Groß",            "position": "MID", "photo": "./photos/gross.png" },
   { "id": "nmecha",        "name": "Felix Nmecha",           "position": "MID", "photo": "./photos/nmecha.png" },
-  { "id": "pavlovic",      "name": "Aleksandar Pavlović",    "position": "MID", "photo": "" },
+  { "id": "pavlovic",      "name": "Aleksandar Pavlović",    "position": "MID", "photo": "./photos/pavlovic.png" },
   { "id": "stiller",       "name": "Angelo Stiller",         "position": "MID", "photo": "./photos/stiller.png" },
-  { "id": "amiri",         "name": "Nadiem Amiri",           "position": "MID", "photo": "" },
+  { "id": "amiri",         "name": "Nadiem Amiri",           "position": "MID", "photo": "./photos/amiri.png" },
   { "id": "goretzka",      "name": "Leon Goretzka",          "position": "MID", "photo": "./photos/goretzka.png" },
 
   { "id": "beier",         "name": "Maximilian Beier",       "position": "STR", "photo": "./photos/beier.png" },

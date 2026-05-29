@@ -214,8 +214,8 @@ html, body {
 .field-card:active { cursor: grabbing; }
 
 .field-card__photo {
-  width: 110px;
-  height: 110px;
+  width: 132px;
+  height: 132px;
   display: flex;
   align-items: flex-end;
   justify-content: center;

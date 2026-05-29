@@ -14,6 +14,21 @@
   <body>
     <main id="app" aria-label="Touch Formação">
       <section class="left-panel" aria-label="Controles">
+        <div class="draw-tools" aria-label="Ferramentas de desenho">
+          <button type="button" class="tool-btn" id="draw-toggle" aria-label="Desenhar" aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 20h9" />
+              <path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4Z" />
+            </svg>
+          </button>
+          <button type="button" class="tool-btn" id="erase-all" aria-label="Apagar desenhos">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21" />
+              <path d="M22 21H7" />
+              <path d="m5 11 9 9" />
+            </svg>
+          </button>
+        </div>
         <div class="slots" id="slots" aria-label="Slots de salvamento"></div>
         <button type="button" class="clean-btn" id="clean" aria-label="Limpar escalação">CLEAN</button>
         <div class="trash" id="trash" aria-label="Remover jogador">🗑</div>
@@ -21,6 +36,7 @@
       <section class="field-panel" aria-label="Campo">
         <div class="field" id="field">
           <img src="./field.png" alt="" class="field-img" draggable="false" />
+          <canvas class="draw-layer" id="draw-layer"></canvas>
           <div class="placed-layer" id="placed-layer"></div>
         </div>
       </section>

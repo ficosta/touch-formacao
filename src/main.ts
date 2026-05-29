@@ -4,6 +4,7 @@ import { mountViews } from './views/mount';
 import { initDragDrop } from './interactions/dragdrop';
 import { initSlots } from './interactions/slots';
 import { initHoldButton } from './interactions/hold-button';
+import { initDrawing } from './interactions/drawing';
 import { Player } from './types';
 
 async function bootstrap(): Promise<void> {
@@ -38,6 +39,13 @@ async function bootstrap(): Promise<void> {
     if (store.getState().current.placed.length > 0) store.dispatch({ type: 'clear-current' });
   });
 
+  initDrawing({
+    field: refs.field,
+    canvas: refs.drawLayer,
+    drawBtn: refs.drawToggle,
+    eraseBtn: refs.eraseAll
+  });
+
   if ('serviceWorker' in navigator) {
     const hadController = !!navigator.serviceWorker.controller;
     let reloaded = false;
@@ -65,6 +73,9 @@ type Refs = {
   slots: HTMLElement;
   ghost: HTMLElement;
   clean: HTMLElement;
+  drawLayer: HTMLCanvasElement;
+  drawToggle: HTMLElement;
+  eraseAll: HTMLElement;
 };
 
 function getRefs(): Refs | null {
@@ -76,8 +87,12 @@ function getRefs(): Refs | null {
   const slots = document.getElementById('slots');
   const ghost = document.getElementById('drag-ghost');
   const clean = document.getElementById('clean');
+  const drawLayer = document.getElementById('draw-layer');
+  const drawToggle = document.getElementById('draw-toggle');
+  const eraseAll = document.getElementById('erase-all');
   if (!root || !sidebar || !field || !placedLayer || !trash || !slots || !ghost || !clean) return null;
-  return { root, sidebar, field, placedLayer, trash, slots, ghost, clean };
+  if (!(drawLayer instanceof HTMLCanvasElement) || !drawToggle || !eraseAll) return null;
+  return { root, sidebar, field, placedLayer, trash, slots, ghost, clean, drawLayer, drawToggle, eraseAll };
 }
 
 void bootstrap();

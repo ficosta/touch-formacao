@@ -1,4 +1,4 @@
-const CACHE = 'touch-formacao-v4';
+const CACHE = 'touch-formacao-v5';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './bg.jpg', './field.png', './squad.json'];
 
 self.addEventListener('install', (event) => {

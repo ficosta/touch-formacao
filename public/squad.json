@@ -22,9 +22,9 @@
 
   { "id": "beier",         "name": "Maximilian Beier",       "position": "STR", "photo": "./photos/beier.png" },
   { "id": "havertz",       "name": "Kai Havertz",            "position": "STR", "photo": "./photos/havertz.png" },
-  { "id": "karl",          "name": "Lennart Karl",           "position": "STR", "photo": "./photos/karl.png" },
   { "id": "leweling",      "name": "Jamie Leweling",         "position": "STR", "photo": "./photos/leweling.png" },
   { "id": "musiala",       "name": "Jamal Musiala",          "position": "STR", "photo": "./photos/musiala.png" },
+  { "id": "ouedraogo",     "name": "Assan Ouédraogo",        "position": "STR", "photo": "./photos/ouedraogo.png" },
   { "id": "sane",          "name": "Leroy Sané",             "position": "STR", "photo": "./photos/sane.png" },
   { "id": "undav",         "name": "Deniz Undav",            "position": "STR", "photo": "./photos/undav.png" },
   { "id": "wirtz",         "name": "Florian Wirtz",          "position": "STR", "photo": "./photos/wirtz.png" },

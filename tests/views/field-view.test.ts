@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { createFieldView, createFieldCard, initialsOf } from '../../src/views/field-view';
+import { createFieldView, createFieldCard, initialsOf, lastNameOf } from '../../src/views/field-view';
 import { Player } from '../../src/types';
 
 const players: Player[] = [
@@ -13,12 +13,18 @@ describe('initialsOf', () => {
   it('caps at two initials', () => expect(initialsOf('Luiz Felipe da Silva')).toBe('LF'));
 });
 
+describe('lastNameOf', () => {
+  it('returns the last name', () => expect(lastNameOf('Manuel Neuer')).toBe('Neuer'));
+  it('handles single name', () => expect(lastNameOf('Pele')).toBe('Pele'));
+  it('handles multi-part names', () => expect(lastNameOf('Luiz Felipe da Silva')).toBe('Silva'));
+});
+
 describe('createFieldCard', () => {
-  it('renders photo + label', () => {
+  it('renders photo + label with last name only', () => {
     const el = createFieldCard(players[0]!);
     expect(el.classList.contains('field-card')).toBe(true);
     expect(el.querySelector('img')).toBeTruthy();
-    expect(el.querySelector('.field-card__label')!.textContent).toBe('MANUEL NEUER');
+    expect(el.querySelector('.field-card__label')!.textContent).toBe('NEUER');
   });
 
   it('falls back to initials when photo missing', () => {

@@ -1,6 +1,7 @@
 import { h, clearChildren } from '../dom';
 import { AppState, Player, Position } from '../types';
 import { POSITION_LABEL, POSITION_ORDER } from '../constants';
+import { lastNameOf } from './field-view';
 
 export type SidebarView = { render(state: AppState): void };
 
@@ -9,7 +10,7 @@ const COLLAPSE_KEY = 'touch-formacao:collapsed';
 export function groupByPosition(players: readonly Player[]): Record<Position, Player[]> {
   const out: Record<Position, Player[]> = { GK: [], DEF: [], MID: [], STR: [] };
   for (const p of players) out[p.position].push(p);
-  for (const k of POSITION_ORDER) out[k].sort((a, b) => a.name.localeCompare(b.name));
+  for (const k of POSITION_ORDER) out[k].sort((a, b) => lastNameOf(a.name).localeCompare(lastNameOf(b.name)));
   return out;
 }
 
@@ -21,7 +22,7 @@ export function createSidebarRow(player: Player): HTMLElement {
       'data-player-id': player.id,
       role: 'button',
       'aria-label': player.name,
-      text: player.name.toUpperCase()
+      text: lastNameOf(player.name).toUpperCase()
     }
   );
 }

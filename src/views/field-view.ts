@@ -12,6 +12,11 @@ export function initialsOf(name: string): string {
     .join('');
 }
 
+export function lastNameOf(name: string): string {
+  const parts = name.split(/\s+/).filter(Boolean);
+  return parts.length ? parts[parts.length - 1]! : name;
+}
+
 export function createFieldCard(player: Player): HTMLElement {
   const photo = h('div', { class: 'field-card__photo' });
   if (player.photo) {
@@ -36,7 +41,7 @@ export function createFieldCard(player: Player): HTMLElement {
       'aria-label': player.name
     },
     photo,
-    h('div', { class: 'field-card__label', text: player.name.toUpperCase() })
+    h('div', { class: 'field-card__label', text: lastNameOf(player.name).toUpperCase() })
   );
 }
 
